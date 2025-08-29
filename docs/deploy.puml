@@ -1,0 +1,37 @@
+@startuml
+' Título opcional
+title Diagrama de Despliegue - BiblioApp
+
+
+' Conexiones entre nodos
+"Backend - Replit" --> "Celular Android" : HTTP/HTTPS
+"Backend - Replit" --> "Cliente (Navegador)" : HTTP/HTTPS
+"Open Street Map" --> "Celular Android" : HTTP/HTTPS
+"Backend - Replit" --> "Google" : SMTP
+
+node "Celular Android" {
+  artifact "BiblioApp.apk"
+}
+
+node "Cliente (Navegador)" {
+  artifact "React App"
+}
+
+node "Open Street Map" {
+  component "Map Server"
+}
+
+node "Google" {
+  component "Gmail"
+}
+
+node "Backend - Replit" {
+  component "BiblioApp Sinatra"
+  database "SQlite3 DB"
+}
+
+note right of "Backend - Replit"
+  192.168.2.3
+end note
+
+@enduml

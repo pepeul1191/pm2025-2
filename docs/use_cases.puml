@@ -1,0 +1,56 @@
+@startuml
+!theme plain
+
+left to right direction
+
+actor "Usuario" as User
+actor "Administrador" as Admin
+
+rectangle "App Móvil BiblioApp" {
+  usecase "Registrar cuenta" as UC1
+  usecase "Iniciar sesión" as UC2
+  usecase "Explorar catálogo de libros" as UC3
+  usecase "Buscar libros" as UC4
+  usecase "Ver detalles del libro" as UC5
+  usecase "Leer sinopsis y reseñas" as UC6
+  usecase "Crear reseña y calificación" as UC7
+  usecase "Gestionar perfil de usuario" as UC8
+  usecase "Gestionar dispositivos" as UC9
+}
+
+rectangle "App Web BiblioApp" {
+  usecase "Gestionar libros" as UC10
+  usecase "Gestionar autores" as UC11
+  usecase "Gestionar editoriales" as UC12
+  usecase "Gestionar géneros" as UC13
+  usecase "Moderar reseñas" as UC14
+}
+
+' Relaciones del Usuario
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+User --> UC5
+User --> UC6
+User --> UC7
+User --> UC8
+
+' Relaciones del Administrador
+Admin --> UC10
+Admin --> UC11
+Admin --> UC12
+Admin --> UC13
+Admin --> UC14
+
+' Conexiones entre casos de uso
+UC3 .> UC4 : <<include>>
+UC5 .> UC6 : <<include>>
+UC7 .> UC6 : <<include>>
+UC8 .> UC2 : <<include>>
+UC10 .> UC11 : <<include>>
+UC10 .> UC12 : <<include>>
+UC10 .> UC13 : <<include>>
+UC2 <. UC9 : <<extend>>
+
+@enduml

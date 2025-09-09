@@ -1,5 +1,7 @@
-import 'package:biblioapp/configs/theme.dart';
+import 'pages/sign_in/sign_in_page.dart';
 import 'package:flutter/material.dart';
+
+import 'configs/theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,39 +12,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Obtener el TextTheme por defecto sin depender de un BuildContext
     final TextTheme baseTextTheme = Typography.material2021().englishLike;
     final MaterialTheme materialTheme = MaterialTheme(baseTextTheme);
 
     return MaterialApp(
-      title: 'Hola Mundo',
+      title: 'Flutter Demo',
       theme: materialTheme.light(),
       darkTheme: materialTheme.dark(),
-      themeMode: ThemeMode.system,
-      home: const MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return Scaffold(
-      appBar: AppBar(title: const Text('Mi Primera App')),
-      body: Center(
-        child: Text(
-          '¡Hola Mundo!',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: colorScheme.secondary,
-          ),
-        ),
-      ),
+      home: SignInPage(),
     );
   }
 }

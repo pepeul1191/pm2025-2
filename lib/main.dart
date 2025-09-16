@@ -1,4 +1,6 @@
 import 'pages/sign_in/sign_in_page.dart';
+import 'pages/sign_up/sign_up_page.dart';
+import 'pages/reset_password/reset_password_page.dart';
 import 'package:flutter/material.dart';
 
 import 'configs/theme.dart';
@@ -19,7 +21,12 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: materialTheme.light(),
       darkTheme: materialTheme.dark(),
-      home: SignInPage(),
+      initialRoute: '/sign-in',
+      routes: {
+        '/sign-in': (context) => SignInPage(),
+        '/sign-up': (context) => SignUpPage(),
+        '/reset-password': (context) => ResetPasswordPage(),
+      },
     );
   }
 }

@@ -10,18 +10,16 @@ class SignInPage extends StatelessWidget {
       children: [
         Expanded(
           child: Container(
-            color:
-                Theme.of(
-                  context,
-                ).colorScheme.onSecondary, // Color de la primera mitad
+            color: Theme.of(
+              context,
+            ).colorScheme.onSecondary, // Color de la primera mitad
           ),
         ),
         Expanded(
           child: Container(
-            color:
-                Theme.of(
-                  context,
-                ).colorScheme.surfaceDim, // Color de la segunda mitad
+            color: Theme.of(
+              context,
+            ).colorScheme.surfaceDim, // Color de la segunda mitad
           ),
         ),
       ],
@@ -123,7 +121,9 @@ class SignInPage extends StatelessWidget {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/home');
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).primaryColor,
                     shape: RoundedRectangleBorder(
@@ -145,11 +145,19 @@ class SignInPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('No tienes una cuenta'),
-                  Text(
-                    ', creala aquí',
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.bold,
+                  GestureDetector(
+                    onTap: () {
+                      // Aquí puedes colocar el evento que quieres ejecutar cuando el texto sea tocado
+                      print("Texto tocado");
+                      Navigator.pushNamed(context, '/sign-up');
+                      // Puedes navegar a otra pantalla, abrir un diálogo, etc.
+                    },
+                    child: Text(
+                      ', creala aquí',
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
@@ -170,19 +178,16 @@ class SignInPage extends StatelessWidget {
           width: 200,
           height: 200,
           fit: BoxFit.cover,
-          errorBuilder: (
-            BuildContext context,
-            Object exception,
-            StackTrace? stackTrace,
-          ) {
-            // Este widget se muestra cuando ocurre un error al cargar la imagen de red.
-            return Image.asset(
-              'assets/images/ulises.png',
-              width: 200,
-              height: 200,
-              fit: BoxFit.cover,
-            );
-          },
+          errorBuilder:
+              (BuildContext context, Object exception, StackTrace? stackTrace) {
+                // Este widget se muestra cuando ocurre un error al cargar la imagen de red.
+                return Image.asset(
+                  'assets/images/ulises.png',
+                  width: 200,
+                  height: 200,
+                  fit: BoxFit.cover,
+                );
+              },
         ),
         Container(
           margin: const EdgeInsets.only(
@@ -209,11 +214,19 @@ class SignInPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('Olvidaste tu contraseña?'),
-          Text(
-            ', Recupérala aquí',
-            style: TextStyle(
-              color: Theme.of(context).primaryColor,
-              fontWeight: FontWeight.bold,
+          GestureDetector(
+            onTap: () {
+              // Aquí puedes colocar el evento que quieres ejecutar cuando el texto sea tocado
+              print("Texto tocado");
+              Navigator.pushNamed(context, '/reset-password');
+              // Puedes navegar a otra pantalla, abrir un diálogo, etc.
+            },
+            child: Text(
+              ', Recupérala aquí',
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],

@@ -247,12 +247,32 @@ class SignUpPage extends StatelessWidget {
     );
   }
 
+  Widget _backbutton(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(top: 30, left: 20),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: IconButton(
+          icon: Icon(Icons.arrow_back, size: 24),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          style: IconButton.styleFrom(
+            padding: EdgeInsets.all(8),
+            minimumSize: Size(40, 40),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildBody(BuildContext context) {
     return SafeArea(
       child: Stack(
         children: [
           _background(context),
           SingleChildScrollView(child: _foreground(context)),
+          _backbutton(context),
         ],
       ),
     );

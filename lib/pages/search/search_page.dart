@@ -1,3 +1,5 @@
+import 'package:biblioapp/pages/books/books_page.dart';
+import 'package:biblioapp/pages/comentaries/comentaries_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'search_controller.dart' as SearchControllerAlias;
@@ -45,10 +47,7 @@ class _SearchPageState extends State<SearchPage>
         Expanded(
           child: TabBarView(
             controller: _tabController,
-            children: [
-              Center(child: Text('Contenido del primer tab')),
-              Center(child: Text('Contenido del segundo tab')),
-            ],
+            children: [BooksPage(), ComentariesPage()],
           ),
         ),
       ],

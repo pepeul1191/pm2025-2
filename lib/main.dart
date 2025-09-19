@@ -1,3 +1,5 @@
+import 'package:biblioapp/pages/book/book_page.dart';
+
 import 'pages/sign_in/sign_in_page.dart';
 import 'pages/sign_up/sign_up_page.dart';
 import 'pages/profile/profile_page.dart';
@@ -27,6 +29,7 @@ class MyApp extends StatelessWidget {
         '/profile': (context) => ProfilePage(),
         '/sign-in': (context) => SignInPage(),
         '/sign-up': (context) => SignUpPage(),
+        '/book': (context) => BookPage(),
         '/home': (context) => HomePage(),
         '/reset-password': (context) => ResetPasswordPage(),
       },

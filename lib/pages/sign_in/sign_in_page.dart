@@ -3,7 +3,11 @@ import 'package:get/get.dart';
 import 'sign_in_controller.dart';
 
 class SignInPage extends StatelessWidget {
-  SignInController control = Get.put(SignInController());
+  late final SignInController control;
+
+  SignInPage({Key? key}) : super(key: key) {
+    control = Get.put(SignInController()); // Inicializar en el cuerpo
+  }
 
   Widget _background(BuildContext context) {
     return Column(
@@ -51,6 +55,7 @@ class SignInPage extends StatelessWidget {
               SizedBox(height: 15),
               // Campo de usuario
               TextFormField(
+                controller: control.userController,
                 decoration: InputDecoration(
                   labelText: 'Usuario',
                   border: UnderlineInputBorder(
@@ -84,6 +89,7 @@ class SignInPage extends StatelessWidget {
               SizedBox(height: 15),
               // Campo de contraseña
               TextFormField(
+                controller: control.passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Contraseña',
@@ -115,6 +121,21 @@ class SignInPage extends StatelessWidget {
                   ),
                 ),
               ),
+              Obx(
+                () => Column(
+                  children: [
+                    SizedBox(height: control.message.value != '' ? 15 : 0),
+                    Text(
+                      control.message.value,
+                      style: TextStyle(
+                        color: control.success.value
+                            ? Theme.of(context).colorScheme.secondaryFixedDim
+                            : Theme.of(context).colorScheme.error,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               SizedBox(height: 15),
               // Botón de login
               SizedBox(
@@ -122,7 +143,7 @@ class SignInPage extends StatelessWidget {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/home');
+                    control.login(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).primaryColor,
@@ -148,8 +169,7 @@ class SignInPage extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       // Aquí puedes colocar el evento que quieres ejecutar cuando el texto sea tocado
-                      print("Texto tocado");
-                      Navigator.pushNamed(context, '/sign-up');
+                      control.goToSignUp(context);
                       // Puedes navegar a otra pantalla, abrir un diálogo, etc.
                     },
                     child: Text(
@@ -217,8 +237,7 @@ class SignInPage extends StatelessWidget {
           GestureDetector(
             onTap: () {
               // Aquí puedes colocar el evento que quieres ejecutar cuando el texto sea tocado
-              print("Texto tocado");
-              Navigator.pushNamed(context, '/reset-password');
+              control.goToResetPassword(context);
               // Puedes navegar a otra pantalla, abrir un diálogo, etc.
             },
             child: Text(

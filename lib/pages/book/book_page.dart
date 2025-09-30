@@ -7,8 +7,6 @@ class BookPage extends StatelessWidget {
   BookController control = Get.put(BookController());
   final String pdfPath = 'assets/sample.pdf';
 
-  BookPage({super.key});
-
   Widget _buildBody(BuildContext context) {
     return SafeArea(
       child: PDFView(

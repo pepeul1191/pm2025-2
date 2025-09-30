@@ -1,4 +1,5 @@
 import 'package:biblioapp/pages/profile/profile_page.dart';
+import 'package:biblioapp/services/session_service.dart';
 
 import 'pages/sign_up/sign_up_page.dart';
 import 'pages/reset_password/reset_password_page.dart';
@@ -8,7 +9,10 @@ import 'package:flutter/material.dart';
 
 import 'configs/theme.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Inicializar SharedPreferences Service
+  await SessionService().init();
   runApp(const MyApp());
 }
 

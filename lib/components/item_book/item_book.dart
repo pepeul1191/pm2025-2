@@ -5,8 +5,6 @@ import 'item_book_controller.dart';
 class ItemBook extends StatelessWidget {
   ItemBookController control = Get.put(ItemBookController());
 
-  ItemBook({super.key});
-
   Widget _menu(BuildContext context) {
     return PopupMenuButton<String>(
       icon: Icon(Icons.more_vert),

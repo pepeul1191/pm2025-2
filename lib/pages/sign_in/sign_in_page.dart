@@ -6,7 +6,7 @@ class SignInPage extends StatelessWidget {
   SignInController control = Get.put(SignInController());
 
   SignInPage({super.key});
-
+  
   Widget _background(BuildContext context) {
     return Column(
       children: [
@@ -86,8 +86,8 @@ class SignInPage extends StatelessWidget {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {
-                    control.login(context);
+                  onPressed: () async {
+                    await control.login(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.primary,
@@ -111,7 +111,7 @@ class SignInPage extends StatelessWidget {
                 children: [
                   Text('No tienes una cuenta'),
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       // Aquí puedes colocar el evento que quieres ejecutar cuando el texto sea tocado
                       print("Texto tocado");
                       control.goToSignUp(context);
@@ -211,6 +211,10 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      control.checkUserLooged(context);
+    });
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: null,

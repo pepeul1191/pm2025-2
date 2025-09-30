@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 class BookItemList extends StatelessWidget {
   final Book book;
-  const BookItemList({super.key, required this.book});
+  BookItemList({super.key, required this.book});
 
   Widget _buildBody(BuildContext context) {
     return Container(

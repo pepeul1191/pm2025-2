@@ -5,8 +5,6 @@ import 'package:get/get.dart';
 import 'search_controller.dart' as SearchControllerAlias;
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
-
   @override
   _SearchPageState createState() => _SearchPageState();
 }

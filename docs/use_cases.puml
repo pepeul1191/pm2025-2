@@ -16,6 +16,7 @@ rectangle "App Móvil BiblioApp" {
   usecase "Crear reseña y calificación" as UC7
   usecase "Gestionar perfil de usuario" as UC8
   usecase "Gestionar dispositivos" as UC9
+  usecase "Recuperar Contraseña" as UC15
 }
 
 rectangle "App Web BiblioApp" {
@@ -35,6 +36,7 @@ User --> UC5
 User --> UC6
 User --> UC7
 User --> UC8
+User --> UC15
 
 ' Relaciones del Administrador
 Admin --> UC10
@@ -52,5 +54,6 @@ UC10 .> UC11 : <<include>>
 UC10 .> UC12 : <<include>>
 UC10 .> UC13 : <<include>>
 UC2 <. UC9 : <<extend>>
+UC2 <. UC15 : <<extend>>
 
 @enduml

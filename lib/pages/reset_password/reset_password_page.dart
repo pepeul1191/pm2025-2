@@ -5,21 +5,22 @@ import 'reset_password_controller.dart';
 class ResetPasswordPage extends StatelessWidget {
   ResetPasswordController control = Get.put(ResetPasswordController());
 
+  ResetPasswordPage({super.key});
+
   Widget _background(BuildContext context) {
     return Column(
       children: [
         Expanded(
           child: Container(
-            color: Theme.of(
-              context,
-            ).colorScheme.onSecondary, // Color de la primera mitad
+            color:
+                Theme.of(
+                  context,
+                ).colorScheme.onPrimaryContainer, // Color de la primera mitad
           ),
         ),
         Expanded(
           child: Container(
-            color: Theme.of(
-              context,
-            ).colorScheme.surfaceDim, // Color de la segunda mitad
+            color: Colors.white, // Color de la segunda mitad
           ),
         ),
       ],
@@ -28,73 +29,51 @@ class ResetPasswordPage extends StatelessWidget {
 
   Widget _form(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsGeometry.only(left: 50, right: 50),
+      padding: EdgeInsets.only(
+        left: 50,
+        right: 50,
+      ), // padding: 20px 30px 20px 10px;
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onSecondary,
           border: Border.all(color: Colors.grey, width: 1),
+          color: Theme.of(context).colorScheme.onPrimary,
         ),
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(30),
           child: Column(
             children: [
-              SizedBox(height: 15),
               // Subtítulo
               Text(
-                'SOLICITE CAMBIO DE CONTRASEÑA',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
+                'SOLICITE CAMBIO DE',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
-              SizedBox(height: 15),
-              // Campo de usuario
+              Text(
+                'CONTRASEÑA',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+              const SizedBox(height: 20),
+              // Campo de correo
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Correo',
-                  border: UnderlineInputBorder(
-                    // Solo borde inferior
-                    borderSide: BorderSide(
-                      color: Colors.grey.shade400,
-                      width: 1.0,
-                    ),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    // Borde cuando está habilitado
-                    borderSide: BorderSide(
-                      color: Colors.grey.shade400,
-                      width: 1.0,
-                    ),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    // Borde cuando está enfocado
-                    borderSide: BorderSide(
-                      color: Theme.of(context).colorScheme.primary,
-                      width: 2.0,
-                    ),
-                  ),
-                  prefixIcon: const Icon(Icons.email), // Icono al inicio
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 16,
-                    horizontal: 0,
-                  ),
+                  border: UnderlineInputBorder(), // Borde inferior por defecto
+                  prefixIcon: const Icon(Icons.mail),
                 ),
               ),
-              SizedBox(height: 15),
-              // Botón de login
+              SizedBox(height: 20),
+              // Botón de reset
               SizedBox(
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).primaryColor,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(0),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'ENVIAR CORREO',
                     style: TextStyle(
                       fontSize: 18,
@@ -121,16 +100,19 @@ class ResetPasswordPage extends StatelessWidget {
           width: 200,
           height: 200,
           fit: BoxFit.cover,
-          errorBuilder:
-              (BuildContext context, Object exception, StackTrace? stackTrace) {
-                // Este widget se muestra cuando ocurre un error al cargar la imagen de red.
-                return Image.asset(
-                  'assets/images/ulises.png',
-                  width: 200,
-                  height: 200,
-                  fit: BoxFit.cover,
-                );
-              },
+          errorBuilder: (
+            BuildContext context,
+            Object exception,
+            StackTrace? stackTrace,
+          ) {
+            // Este widget se muestra cuando ocurre un error al cargar la imagen de red.
+            return Image.asset(
+              'assets/images/ulises.png',
+              width: 200,
+              height: 200,
+              fit: BoxFit.cover,
+            );
+          },
         ),
         Container(
           margin: const EdgeInsets.only(
@@ -139,34 +121,29 @@ class ResetPasswordPage extends StatelessWidget {
           ), // Margen superior de 20
           child: Text(
             'BiblioApp ULima',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
         ),
         _form(context),
-        SizedBox(
-          height: MediaQuery.of(context).viewInsets.bottom > 0 ? 20 : 150,
-        ),
+        SizedBox(height: 100),
       ],
     );
   }
 
-  Widget _backbutton(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 30, left: 20),
-      child: Align(
-        alignment: Alignment.topLeft,
-        child: IconButton(
-          icon: Icon(Icons.arrow_back, size: 24),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          style: IconButton.styleFrom(
-            padding: EdgeInsets.all(8),
-            minimumSize: Size(40, 40),
-          ),
-        ),
+  Widget _backbutton(BuildContext context){
+    return Padding(padding: EdgeInsets.all(20), child: GestureDetector(
+      onTap: () {
+        // Aquí puedes colocar el evento que quieres ejecutar cuando el texto sea tocado
+        print("Texto tocado");
+        Navigator.of(context).pop();
+        // Puedes navegar a otra pantalla, abrir un diálogo, etc.
+      },
+      child: Icon(
+        Icons.arrow_back, // Icono de flecha hacia atrás
+        color: Theme.of(context).primaryColor,
+        size: 24, // Tamaño del icono (opcional)
       ),
-    );
+    ),);
   }
 
   Widget _buildBody(BuildContext context) {
@@ -176,12 +153,11 @@ class ResetPasswordPage extends StatelessWidget {
           _background(context),
           SingleChildScrollView(
             child: SizedBox(
-              // Asegura que ocupe toda la altura
               height: MediaQuery.of(context).size.height,
               child: _foreground(context),
             ),
           ),
-          _backbutton(context),
+          _backbutton(context)
         ],
       ),
     );
@@ -190,7 +166,7 @@ class ResetPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true, // Permite que la interfaz se redimensione
+      resizeToAvoidBottomInset: false,
       appBar: null,
       body: _buildBody(context),
     );

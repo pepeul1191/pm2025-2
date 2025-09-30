@@ -1,0 +1,297 @@
+{
+    "success": true,
+    "message": "listado de libros",
+    "data": [
+        {
+          "id": 1,
+          "title": "Cien años de soledad",
+          "isbn": "978-84-376-0494-7",
+          "pages": 471,
+          "publication_year": 1967,
+          "edition_year": 2020,
+          "synopsis": "La novela narra la historia de la familia Buendía a lo largo de siete generaciones en el pueblo ficticio de Macondo.",
+          "cover_image": "images/book1.png",
+          "pdf": "cien_anos_soledad.pdf",
+          "publisher": {
+            "id": 3,
+            "name": "Editorial Sudamericana",
+            "logo": "sudamericana_logo.png"
+          },
+          "authors": [
+            {
+              "id": 1,
+              "full_name": "Gabriel García Márquez",
+              "birth_date": "1927-03-06",
+              "image": "gabriel_garcia_marquez.jpg"
+            }
+          ],
+          "genres": [
+            {"id": 1, "name": "Realismo Mágico"},
+            {"id": 3, "name": "Novela"}
+          ],
+          "reviews": {"average": 4.8}
+        },
+        {
+          "id": 2,
+          "title": "1984",
+          "isbn": "978-84-9759-327-5",
+          "pages": 326,
+          "publication_year": 1949,
+          "edition_year": 2019,
+          "synopsis": "Una distopía que presenta un estado totalitario que controla cada aspecto de la vida de los ciudadanos.",
+          "cover_image": "images/book2.png",
+          "pdf": "1984.pdf",
+          "publisher": {
+            "id": 5,
+            "name": "Debolsillo",
+            "logo": "debolsillo_logo.png"
+          },
+          "authors": [
+            {
+              "id": 5,
+              "full_name": "George Orwell",
+              "birth_date": "1903-06-25",
+              "image": "george_orwell.jpg"
+            }
+          ],
+          "genres": [
+            {"id": 4, "name": "Ciencia Ficción"},
+            {"id": 8, "name": "Thriller"}
+          ],
+          "reviews": {"average": 4.7}
+        },
+        {
+          "id": 3,
+          "title": "Cien sonetos de amor",
+          "isbn": "978-84-8365-383-7",
+          "pages": 128,
+          "publication_year": 1959,
+          "edition_year": 2018,
+          "synopsis": "Colección de sonetos que expresan el amor más profundo y apasionado del poeta chileno.",
+          "cover_image": "images/book3.png",
+          "pdf": "cien_sonetos.pdf",
+          "publisher": {
+            "id": 6,
+            "name": "Editorial Losada",
+            "logo": "losada_logo.png"
+          },
+          "authors": [
+            {
+              "id": 6,
+              "full_name": "Pablo Neruda",
+              "birth_date": "1904-07-12",
+              "image": "pablo_neruda.jpg"
+            }
+          ],
+          "genres": [
+            {"id": 11, "name": "Poesía"},
+            {"id": 7, "name": "Romance"}
+          ],
+          "reviews": {"average": 4.6}
+        },
+        {
+          "id": 4,
+          "title": "Harry Potter y la piedra filosofal",
+          "isbn": "978-84-9838-465-7",
+          "pages": 320,
+          "publication_year": 1997,
+          "edition_year": 2021,
+          "synopsis": "El primer libro de la saga del joven mago Harry Potter y sus aventuras en Hogwarts.",
+          "cover_image": "images/book4.png",
+          "pdf": "harry_potter.pdf",
+          "publisher": {
+            "id": 7,
+            "name": "Salamandra",
+            "logo": "salamandra_logo.png"
+          },
+          "authors": [
+            {
+              "id": 4,
+              "full_name": "J.K. Rowling",
+              "birth_date": "1965-07-31",
+              "image": "jk_rowling_author.jpg"
+            }
+          ],
+          "genres": [
+            {"id": 5, "name": "Fantasía"},
+            {"id": 12, "name": "Aventura"}
+          ],
+          "reviews": {"average": 4.9}
+        },
+        {
+          "id": 5,
+          "title": "La casa de los espíritus",
+          "isbn": "978-84-204-8301-3",
+          "pages": 432,
+          "publication_year": 1982,
+          "edition_year": 2020,
+          "synopsis": "Novela que narra la saga de la familia Trueba a lo largo de cuatro generaciones.",
+          "cover_image": "images/book5.png",
+          "pdf": "casa_espiritus.pdf",
+          "publisher": {
+            "id": 4,
+            "name": "Editorial Planeta",
+            "logo": "planeta_logo.png"
+          },
+          "authors": [
+            {
+              "id": 2,
+              "full_name": "Isabel Allende",
+              "birth_date": "1942-08-02",
+              "image": "isabel_allende_portrait.jpg"
+            }
+          ],
+          "genres": [
+            {"id": 1, "name": "Realismo Mágico"},
+            {"id": 10, "name": "Histórica"}
+          ],
+          "reviews": {"average": 4.5}
+        },
+        {
+          "id": 6,
+          "title": "El código Da Vinci",
+          "isbn": "978-84-9759-748-8",
+          "pages": 656,
+          "publication_year": 2003,
+          "edition_year": 2019,
+          "synopsis": "Thriller que mezcla misterio, conspiración y arte en una trepidante búsqueda del Santo Grial.",
+          "cover_image": "images/book6.png",
+          "pdf": "codigo_davinci.pdf",
+          "publisher": {
+            "id": 8,
+            "name": "Umbriel",
+            "logo": "umbriel_logo.png"
+          },
+          "authors": [
+            {
+              "id": 7,
+              "full_name": "Dan Brown",
+              "birth_date": "1964-06-22",
+              "image": "dan_brown.jpg"
+            }
+          ],
+          "genres": [
+            {"id": 6, "name": "Misterio"},
+            {"id": 8, "name": "Thriller"}
+          ],
+          "reviews": {"average": 4.2}
+        },
+        {
+          "id": 7,
+          "title": "Rayuela",
+          "isbn": "978-84-339-0092-6",
+          "pages": 736,
+          "publication_year": 1963,
+          "edition_year": 2017,
+          "synopsis": "Novela innovadora que puede leerse de forma lineal o siguiendo un tablero de dirección.",
+          "cover_image": "images/book7.png",
+          "pdf": "rayuela.pdf",
+          "publisher": {
+            "id": 9,
+            "name": "Alfaguara",
+            "logo": "alfaguara_logo.png"
+          },
+          "authors": [
+            {
+              "id": 8,
+              "full_name": "Julio Cortázar",
+              "birth_date": "1914-08-26",
+              "image": "cortazar.jpg"
+            }
+          ],
+          "genres": [
+            {"id": 2, "name": "Ficción Literaria"},
+            {"id": 13, "name": "Experimental"}
+          ],
+          "reviews": {"average": 4.4}
+        },
+        {
+          "id": 8,
+          "title": "Los pilares de la Tierra",
+          "isbn": "978-84-9759-882-9",
+          "pages": 1056,
+          "publication_year": 1989,
+          "edition_year": 2020,
+          "synopsis": "Epica novela histórica sobre la construcción de una catedral en la Inglaterra medieval.",
+          "cover_image": "images/book8.png",
+          "pdf": "pilares_tierra.pdf",
+          "publisher": {
+            "id": 10,
+            "name": "DeBolsillo",
+            "logo": "debolsillo_logo.png"
+          },
+          "authors": [
+            {
+              "id": 9,
+              "full_name": "Ken Follett",
+              "birth_date": "1949-06-05",
+              "image": "ken_follett.jpg"
+            }
+          ],
+          "genres": [
+            {"id": 10, "name": "Histórica"},
+            {"id": 3, "name": "Novela"}
+          ],
+          "reviews": {"average": 4.7}
+        },
+        {
+          "id": 9,
+          "title": "El amor en los tiempos del cólera",
+          "isbn": "978-84-397-2071-5",
+          "pages": 464,
+          "publication_year": 1985,
+          "edition_year": 2018,
+          "synopsis": "Historia de amor que se desarrolla a lo largo de más de cincuenta años.",
+          "cover_image": "images/book9.png",
+          "pdf": "amor_colera.pdf",
+          "publisher": {
+            "id": 3,
+            "name": "Editorial Sudamericana",
+            "logo": "sudamericana_logo.png"
+          },
+          "authors": [
+            {
+              "id": 1,
+              "full_name": "Gabriel García Márquez",
+              "birth_date": "1927-03-06",
+              "image": "gabriel_garcia_marquez.jpg"
+            }
+          ],
+          "genres": [
+            {"id": 3, "name": "Novela"},
+            {"id": 7, "name": "Romance"}
+          ],
+          "reviews": {"average": 4.6}
+        },
+        {
+          "id": 10,
+          "title": "La sombra del viento",
+          "isbn": "978-84-204-8302-0",
+          "pages": 576,
+          "publication_year": 2001,
+          "edition_year": 2019,
+          "synopsis": "Misterio literario ambientado en la Barcelona de posguerra.",
+          "cover_image": "images/book10.png",
+          "pdf": "sombra_viento.pdf",
+          "publisher": {
+            "id": 4,
+            "name": "Editorial Planeta",
+            "logo": "planeta_logo.png"
+          },
+          "authors": [
+            {
+              "id": 10,
+              "full_name": "Carlos Ruiz Zafón",
+              "birth_date": "1964-09-25",
+              "image": "ruiz_zafon.jpg"
+            }
+          ],
+          "genres": [
+            {"id": 6, "name": "Misterio"},
+            {"id": 10, "name": "Histórica"}
+          ],
+          "reviews": {"average": 4.8}
+        }
+      ],
+    "error:": null
+}

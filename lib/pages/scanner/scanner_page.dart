@@ -5,6 +5,8 @@ import 'scanner_controller.dart';
 class ScannerPage extends StatelessWidget {
   ScannerController control = Get.put(ScannerController());
 
+  ScannerPage({super.key});
+
   Widget _buildBody(BuildContext context) {
     return SafeArea(child: Text('Scanner Page'));
   }

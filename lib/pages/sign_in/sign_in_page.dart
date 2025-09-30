@@ -3,27 +3,24 @@ import 'package:get/get.dart';
 import 'sign_in_controller.dart';
 
 class SignInPage extends StatelessWidget {
-  late final SignInController control;
+  SignInController control = Get.put(SignInController());
 
-  SignInPage({Key? key}) : super(key: key) {
-    control = Get.put(SignInController()); // Inicializar en el cuerpo
-  }
+  SignInPage({super.key});
 
   Widget _background(BuildContext context) {
     return Column(
       children: [
         Expanded(
           child: Container(
-            color: Theme.of(
-              context,
-            ).colorScheme.onSecondary, // Color de la primera mitad
+            color:
+                Theme.of(
+                  context,
+                ).colorScheme.onPrimaryContainer, // Color de la primera mitad
           ),
         ),
         Expanded(
           child: Container(
-            color: Theme.of(
-              context,
-            ).colorScheme.surfaceDim, // Color de la segunda mitad
+            color: Colors.white, // Color de la segunda mitad
           ),
         ),
       ],
@@ -32,111 +29,58 @@ class SignInPage extends StatelessWidget {
 
   Widget _form(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsGeometry.only(left: 50, right: 50),
+      padding: EdgeInsets.only(
+        left: 50,
+        right: 50,
+      ), // padding: 20px 30px 20px 10px;
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onSecondary,
           border: Border.all(color: Colors.grey, width: 1),
+          color: Theme.of(context).colorScheme.onPrimary,
         ),
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(30),
           child: Column(
             children: [
-              SizedBox(height: 15),
               // Subtítulo
               Text(
                 'INGRESA ESTA INFORMACIÓN',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 20),
               // Campo de usuario
               TextFormField(
-                controller: control.userController,
+                controller: control.username,
                 decoration: InputDecoration(
                   labelText: 'Usuario',
-                  border: UnderlineInputBorder(
-                    // Solo borde inferior
-                    borderSide: BorderSide(
-                      color: Colors.grey.shade400,
-                      width: 1.0,
-                    ),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    // Borde cuando está habilitado
-                    borderSide: BorderSide(
-                      color: Colors.grey.shade400,
-                      width: 1.0,
-                    ),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    // Borde cuando está enfocado
-                    borderSide: BorderSide(
-                      color: Theme.of(context).colorScheme.primary,
-                      width: 2.0,
-                    ),
-                  ),
-                  prefixIcon: const Icon(Icons.person), // Icono al inicio
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 16,
-                    horizontal: 0,
-                  ),
+                  border: UnderlineInputBorder(), // Borde inferior por defecto
+                  prefixIcon: const Icon(Icons.person),
                 ),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 20),
               // Campo de contraseña
               TextFormField(
-                controller: control.passwordController,
+                controller: control.password,
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Contraseña',
-                  border: UnderlineInputBorder(
-                    // Solo borde inferior
-                    borderSide: BorderSide(
-                      color: Colors.grey.shade400,
-                      width: 1.0,
-                    ),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    // Borde cuando está habilitado
-                    borderSide: BorderSide(
-                      color: Colors.grey.shade400,
-                      width: 1.0,
-                    ),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    // Borde cuando está enfocado
-                    borderSide: BorderSide(
-                      color: Theme.of(context).colorScheme.primary,
-                      width: 2.0,
-                    ),
-                  ),
-                  prefixIcon: const Icon(Icons.lock), // Icono al inicio
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 16,
-                    horizontal: 0,
-                  ),
+                  border: UnderlineInputBorder(), // Borde inferior por defecto
+                  prefixIcon: const Icon(Icons.lock),
                 ),
               ),
+              const SizedBox(height: 20),
               Obx(
-                () => Column(
-                  children: [
-                    SizedBox(height: control.message.value != '' ? 15 : 0),
-                    Text(
-                      control.message.value,
-                      style: TextStyle(
-                        color: control.success.value
-                            ? Theme.of(context).colorScheme.secondaryFixedDim
+                () => Text(
+                  control.message.value,
+                  style: TextStyle(
+                    color:
+                        control.success.value
+                            ? Theme.of(context).colorScheme.tertiary
                             : Theme.of(context).colorScheme.error,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               // Botón de login
               SizedBox(
                 width: double.infinity,
@@ -146,12 +90,12 @@ class SignInPage extends StatelessWidget {
                     control.login(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).primaryColor,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(0),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'LOGIN',
                     style: TextStyle(
                       fontSize: 18,
@@ -169,6 +113,7 @@ class SignInPage extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       // Aquí puedes colocar el evento que quieres ejecutar cuando el texto sea tocado
+                      print("Texto tocado");
                       control.goToSignUp(context);
                       // Puedes navegar a otra pantalla, abrir un diálogo, etc.
                     },
@@ -198,16 +143,19 @@ class SignInPage extends StatelessWidget {
           width: 200,
           height: 200,
           fit: BoxFit.cover,
-          errorBuilder:
-              (BuildContext context, Object exception, StackTrace? stackTrace) {
-                // Este widget se muestra cuando ocurre un error al cargar la imagen de red.
-                return Image.asset(
-                  'assets/images/ulises.png',
-                  width: 200,
-                  height: 200,
-                  fit: BoxFit.cover,
-                );
-              },
+          errorBuilder: (
+            BuildContext context,
+            Object exception,
+            StackTrace? stackTrace,
+          ) {
+            // Este widget se muestra cuando ocurre un error al cargar la imagen de red.
+            return Image.asset(
+              'assets/images/ulises.png',
+              width: 200,
+              height: 200,
+              fit: BoxFit.cover,
+            );
+          },
         ),
         Container(
           margin: const EdgeInsets.only(
@@ -216,41 +164,32 @@ class SignInPage extends StatelessWidget {
           ), // Margen superior de 20
           child: Text(
             'BiblioApp ULima',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
         ),
         _form(context),
-        SizedBox(
-          height: MediaQuery.of(context).viewInsets.bottom > 0 ? 20 : 150,
-        ),
-        _footer(context),
-      ],
-    );
-  }
-
-  Widget _footer(BuildContext context) {
-    return Padding(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Olvidaste tu contraseña?'),
-          GestureDetector(
-            onTap: () {
-              // Aquí puedes colocar el evento que quieres ejecutar cuando el texto sea tocado
-              control.goToResetPassword(context);
-              // Puedes navegar a otra pantalla, abrir un diálogo, etc.
-            },
-            child: Text(
-              ', Recupérala aquí',
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontWeight: FontWeight.bold,
+        SizedBox(height: 100),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Olvidaste tu contraseña? '),
+            GestureDetector(
+              onTap: () {
+                // Aquí puedes colocar el evento que quieres ejecutar cuando el texto sea tocado
+                control.goToResetPassword(context);
+                // Puedes navegar a otra pantalla, abrir un diálogo, etc.
+              },
+              child: Text(
+                ', Recupérala aquí',
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-      padding: EdgeInsetsGeometry.all(10),
+          ],
+        ),
+      ],
     );
   }
 
@@ -261,7 +200,6 @@ class SignInPage extends StatelessWidget {
           _background(context),
           SingleChildScrollView(
             child: SizedBox(
-              // Asegura que ocupe toda la altura
               height: MediaQuery.of(context).size.height,
               child: _foreground(context),
             ),
@@ -274,7 +212,7 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true, // Permite que la interfaz se redimensione
+      resizeToAvoidBottomInset: false,
       appBar: null,
       body: _buildBody(context),
     );

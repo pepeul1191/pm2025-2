@@ -1,0 +1,13 @@
+@startuml
+
+class SignInController {
+  -username: TextEditingController
+  -password: TextEditingController
+  -message: RxString
+  -success: RxBool
+  +goToSignUp(BuildContext context): void
+  +goToResetPassword(BuildContext context): void
+  +login(BuildContext context): void
+}
+
+@enduml

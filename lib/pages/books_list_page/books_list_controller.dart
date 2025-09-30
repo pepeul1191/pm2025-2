@@ -4,7 +4,7 @@ import 'package:biblioapp/services/books_service.dart';
 import 'package:get/get.dart';
 
 class BooksListController extends GetxController {
-  BooksService _booksService = BooksService();
+  final BooksService _booksService = BooksService();
   RxList<Book> books = <Book>[].obs;
   // Estado de carga
   RxBool isLoading = false.obs;

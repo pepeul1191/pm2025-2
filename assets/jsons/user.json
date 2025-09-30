@@ -1,6 +1,20 @@
 {
   "success": true,
   "message": "listado de libros",
-  "data": {},
+  "data": {
+    "user": {
+      "id": 1,
+      "username": "pepeul1191",
+      "first_names": "Pepe",
+      "last_names": "Valdivia",
+      "email": "jovaldiv@ulima.edu.pe",
+      "birth_date": "1990-05-15",
+      "profile_picture": "profile.jpg",
+      "sex": true
+    },
+    "tokens": {
+      "biblioapp": "asldkfkjasldkfjaskldfasd"
+    }
+  },
   "error": null
 }

@@ -7,6 +7,8 @@ import '/pages/scanner/scanner_page.dart';
 import '/pages/favorites/favorites_page.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }

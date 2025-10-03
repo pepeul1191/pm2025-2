@@ -1,3 +1,4 @@
+import 'package:biblioapp/pages/book/book_page.dart';
 import 'package:biblioapp/pages/profile/profile_page.dart';
 import 'package:biblioapp/services/session_service.dart';
 
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/sign-in',
       routes: {
         '/home': (context) => HomePage(),
+        '/book': (context) => BookPage(),
         '/sign-in': (context) => SignInPage(),
         '/profile': (context) => ProfilePage(),
         '/sign-up': (context) => SignUpPage(),

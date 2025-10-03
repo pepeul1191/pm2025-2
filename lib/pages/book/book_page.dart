@@ -1,3 +1,4 @@
+import 'package:biblioapp/models/book.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
@@ -51,6 +52,10 @@ class BookPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Book book = ModalRoute.of(context)!.settings.arguments as Book;
+    print('1 +++++++++++++++');
+    print(book);
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(

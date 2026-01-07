@@ -35,8 +35,16 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   get: ^4.6.5
-  flutter_pdfview: 1.3.2
   shared_preferences: ^2.5.3
+  pdfx: ^2.9.2
+  http: ^1.5.0
+  location: ^5.0.0
+  flutter_native_splash: ^2.4.6
+  image_picker: ^0.8.5+3
+  flutter_map: ^6.1.0
+  latlong2: ^0.9.1 
+  geolocator: ^11.0.0
+  permission_handler: ^11.0.0
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +75,25 @@ flutter:
     - assets/jsons/books.json
     - assets/jsons/user.json
   #   - images/a_dot_ham.jpeg
+
+flutter_native_splash:
+  android: true
+  #ios: true
+  #color: "#ffffff"
+  #image: assets/splash.png
+  background_image: assets/images/splash_background.png
+  branding: assets/images/splash_branding.png
+  image: assets/images/splash_icon.png
+  background_image_dark: assets/images/splash_background_dark.png
+  branding_dark: assets/images/splash_branding_dark.png
+  image_dark: assets/images/splash_icon_dark.png
+
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

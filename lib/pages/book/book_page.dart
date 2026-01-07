@@ -1,70 +1,103 @@
+import 'package:biblioapp/configs/constants.dart';
 import 'package:biblioapp/models/book.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'book_controller.dart';
+import 'package:pdfx/pdfx.dart';
 
 class BookPage extends StatelessWidget {
-  BookController control = Get.put(BookController());
-  final String pdfPath = 'assets/sample.pdf';
+  BookPage({super.key});
 
-  Widget _buildBody(BuildContext context) {
-    return SafeArea(
-      child: PDFView(
-        filePath: pdfPath,
-        enableSwipe: true,
-        swipeHorizontal: false,
-        autoSpacing: false,
-        pageFling: false,
-        onError: (error) {
-          print("Error loading PDF: $error");
-          // Muestra un mensaje de error en la UI
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.error_outline, size: 50, color: Colors.red),
-                SizedBox(height: 16),
-                Text('Error al cargar el PDF'),
-                SizedBox(height: 8),
-                Text('Error: $error', textAlign: TextAlign.center),
-              ],
-            ),
-          );
-        },
-        onViewCreated: (PDFViewController pdfViewController) {
-          print("PDF view created");
-        },
-      ),
-    );
-  }
-
-  List<Widget> _appmenu(BuildContext context) {
-    return [
-      IconButton(
-        icon: Icon(Icons.more_vert),
-        onPressed: () {
-          print('Botón de menú presionado');
-        },
-      ),
-    ];
-  }
+  // Usamos Get.put() para que GetX maneje el estado
+  final BookController controller = Get.put(BookController());
 
   @override
   Widget build(BuildContext context) {
+    // Recibimos el libro pasado por las rutas
     final Book book = ModalRoute.of(context)!.settings.arguments as Book;
-    print('1 +++++++++++++++');
-    print(book);
+
+    // Cargar el PDF
+    controller.loadPdf(book);
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        title: Text('Título del Libro'),
-        backgroundColor: Theme.of(context).primaryColor,
-        automaticallyImplyLeading: true,
-        actions: _appmenu(context),
+      resizeToAvoidBottomInset: false,
+      body: SafeArea(
+        child: Column(
+          children: [
+            // AppBar simple dentro de la vista
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              color: Theme.of(context).primaryColor,
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back, color: Colors.white),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                  Expanded(
+                    child: Text(
+                      book.title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // Usamos Obx para observar los cambios del estado del controller
+            Expanded(
+              child: Obx(() {
+                if (controller.isLoading.value) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                if (controller.hasError.value) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.error_outline,
+                          size: 64,
+                          color: Colors.red,
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          'Error: ${controller.errorMessage.value}',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(height: 16),
+                        ElevatedButton(
+                          onPressed: () {
+                            controller.loadPdf(book); // Reintentar
+                          },
+                          child: const Text('Reintentar'),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+
+                return PdfViewPinch(
+                  controller: controller.pdfControllerPinch.value!,
+                  builders: PdfViewPinchBuilders<DefaultBuilderOptions>(
+                    options: const DefaultBuilderOptions(),
+                    documentLoaderBuilder:
+                        (_) => const Center(child: CircularProgressIndicator()),
+                    pageLoaderBuilder:
+                        (_) => const Center(child: CircularProgressIndicator()),
+                  ),
+                );
+              }),
+            ),
+          ],
+        ),
       ),
-      body: _buildBody(context),
     );
   }
 }

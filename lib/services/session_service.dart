@@ -1,9 +1,8 @@
-// services/shared_preferences_service.dart
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:biblioapp/models/user.dart';
-import 'package:biblioapp/models/tokens.dart';
+import 'package:biblioapp/models/token.dart';
 
 class SessionService {
   static final SessionService _instance = SessionService._internal();
@@ -13,81 +12,121 @@ class SessionService {
   static SharedPreferences? _prefs;
 
   // Keys para almacenamiento
-  static const String _userKey = 'current_user';
-  static const String _tokensKey = 'user_tokens';
+  static const String _userKey = 'user_data';
+  static const String _tokenKey = 'token_data';
   static const String _isLoggedInKey = 'is_logged_in';
 
+  // Inicializar SharedPreferences
   Future<void> init() async {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  // Guardar usuario
-  Future<void> saveUser(User user) async {
-    if (_prefs == null) await init();
-    final userJson = user.toJson();
-    await _prefs!.setString(_userKey, json.encode(userJson));
-    await _prefs!.setBool(_isLoggedInKey, true);
+  // Guardar User
+  Future<bool> saveUser(User user) async {
+    try {
+      final userJson = user.toJson();
+      return await _prefs!.setString(_userKey, json.encode(userJson));
+    } catch (e) {
+      print('Error saving user: $e');
+      return false;
+    }
   }
 
-  // Obtener usuario
+  // Obtener User
   User? getUser() {
-    if (_prefs == null) return null;
-    final userJsonString = _prefs!.getString(_userKey);
-    if (userJsonString != null) {
-      final Map<String, dynamic> userMap = json.decode(userJsonString);
-      return User.fromJson(userMap);
+    try {
+      final userString = _prefs!.getString(_userKey);
+      if (userString != null) {
+        final userMap = json.decode(userString) as Map<String, dynamic>;
+        return User.fromJson(userMap);
+      }
+      return null;
+    } catch (e) {
+      print('Error getting user: $e');
+      return null;
     }
-    return null;
   }
 
-  // Guardar tokens
-  Future<void> saveTokens(Tokens tokens) async {
-    if (_prefs == null) await init();
-    final tokensJson = tokens.toJson();
-    await _prefs!.setString(_tokensKey, json.encode(tokensJson));
+  // Guardar Token
+  Future<bool> saveToken(Token token) async {
+    try {
+      final tokenJson = token.toJson();
+      return await _prefs!.setString(_tokenKey, json.encode(tokenJson));
+    } catch (e) {
+      print('Error saving token: $e');
+      return false;
+    }
   }
 
-  // Obtener tokens
-  Tokens? getTokens() {
-    if (_prefs == null) return null;
-    final tokensJsonString = _prefs!.getString(_tokensKey);
-    if (tokensJsonString != null) {
-      final Map<String, dynamic> tokensMap = json.decode(tokensJsonString);
-      return Tokens.fromJson(tokensMap);
+  // Obtener Token
+  Token? getToken() {
+    try {
+      final tokenString = _prefs!.getString(_tokenKey);
+      if (tokenString != null) {
+        final tokenMap = json.decode(tokenString) as Map<String, dynamic>;
+        return Token.fromJson(tokenMap);
+      }
+      return null;
+    } catch (e) {
+      print('Error getting token: $e');
+      return null;
     }
-    return null;
+  }
+
+  // Guardar estado de login
+  Future<bool> setLoggedIn(bool isLoggedIn) async {
+    return await _prefs!.setBool(_isLoggedInKey, isLoggedIn);
   }
 
   // Verificar si está logueado
-  bool get isLoggedIn {
-    if (_prefs == null) return false;
+  bool isLoggedIn() {
     return _prefs!.getBool(_isLoggedInKey) ?? false;
   }
 
-  // Obtener token de autenticación
-  String? get authToken {
-    final tokens = getTokens();
-    return tokens?.biblioapp;
+  // Guardar ambos (User y Token) y marcar como logueado
+  Future<bool> saveAuthData(User user, Token token) async {
+    try {
+      final userSaved = await saveUser(user);
+      final tokenSaved = await saveToken(token);
+      final loginSaved = await setLoggedIn(true);
+
+      return userSaved && tokenSaved && loginSaved;
+    } catch (e) {
+      print('Error saving auth data: $e');
+      return false;
+    }
   }
 
-  // Cerrar sesión
-  Future<void> logout() async {
-    if (_prefs == null) await init();
-    await _prefs!.remove(_userKey);
-    await _prefs!.remove(_tokensKey);
-    await _prefs!.setBool(_isLoggedInKey, false);
+  // Limpiar todos los datos (logout)
+  Future<bool> clearAll() async {
+    try {
+      final userRemoved = await _prefs!.remove(_userKey);
+      final tokenRemoved = await _prefs!.remove(_tokenKey);
+      final loginRemoved = await _prefs!.remove(_isLoggedInKey);
+
+      return userRemoved && tokenRemoved && loginRemoved;
+    } catch (e) {
+      print('Error clearing data: $e');
+      return false;
+    }
   }
 
-  // Limpiar todo
-  Future<void> clearAll() async {
-    if (_prefs == null) await init();
-    await _prefs!.clear();
+  // Verificar si existe data guardada
+  bool hasAuthData() {
+    return getUser() != null && getToken() != null;
   }
 
   @override
   String toString() {
     final user = getUser();
-    final tokens = getTokens();
-    return 'SessionService{isLoggedIn: $isLoggedIn, user: $user, hasTokens: ${tokens != null}, authToken: ${authToken != null ? "${authToken!.substring(0, 10)}..." : "null"}}';
+    final token = getToken();
+    final isLoggedIn = this.isLoggedIn();
+
+    return 'SessionService{\n'
+        '  isLoggedIn: $isLoggedIn,\n'
+        '  hasAuthData: ${hasAuthData()},\n'
+        '  user: ${user?.toString() ?? 'null'},\n'
+        '  token: ${token?.toString() ?? 'null'}\n'
+        '}';
   }
 }

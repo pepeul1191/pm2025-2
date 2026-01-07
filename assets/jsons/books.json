@@ -11,7 +11,7 @@
           "edition_year": 2020,
           "synopsis": "La novela narra la historia de la familia Buendía a lo largo de siete generaciones en el pueblo ficticio de Macondo.",
           "cover_image": "images/book1.png",
-          "pdf": "cien_anos_soledad.pdf",
+          "pdf": "documents/book1.pdf",
           "publisher": {
             "id": 3,
             "name": "Editorial Sudamericana",
@@ -40,7 +40,7 @@
           "edition_year": 2019,
           "synopsis": "Una distopía que presenta un estado totalitario que controla cada aspecto de la vida de los ciudadanos.",
           "cover_image": "images/book2.png",
-          "pdf": "1984.pdf",
+          "pdf": "documents/book2.pdf",
           "publisher": {
             "id": 5,
             "name": "Debolsillo",
@@ -52,13 +52,43 @@
               "full_name": "George Orwell",
               "birth_date": "1903-06-25",
               "image": "george_orwell.jpg"
+            },
+            {
+              "id": 1,
+              "full_name": "Gabriel García Márquez",
+              "birth_date": "1927-03-06",
+              "image": "gabriel_garcia_marquez.jpg"
+            },
+            {
+              "id": 5,
+              "full_name": "George Orwell",
+              "birth_date": "1903-06-25",
+              "image": "george_orwell.jpg"
+            },
+            {
+              "id": 1,
+              "full_name": "Gabriel García Márquez",
+              "birth_date": "1927-03-06",
+              "image": "gabriel_garcia_marquez.jpg"
+            },
+            {
+              "id": 5,
+              "full_name": "George Orwell",
+              "birth_date": "1903-06-25",
+              "image": "george_orwell.jpg"
+            },
+            {
+              "id": 1,
+              "full_name": "Gabriel García Márquez",
+              "birth_date": "1927-03-06",
+              "image": "gabriel_garcia_marquez.jpg"
             }
           ],
           "genres": [
             {"id": 4, "name": "Ciencia Ficción"},
             {"id": 8, "name": "Thriller"}
           ],
-          "reviews": {"average": 4.7}
+          "reviews": {"average": 4.1}
         },
         {
           "id": 3,
@@ -69,7 +99,7 @@
           "edition_year": 2018,
           "synopsis": "Colección de sonetos que expresan el amor más profundo y apasionado del poeta chileno.",
           "cover_image": "images/book3.png",
-          "pdf": "cien_sonetos.pdf",
+          "pdf": "documents/book3.pdf",
           "publisher": {
             "id": 6,
             "name": "Editorial Losada",
@@ -98,7 +128,7 @@
           "edition_year": 2021,
           "synopsis": "El primer libro de la saga del joven mago Harry Potter y sus aventuras en Hogwarts.",
           "cover_image": "images/book4.png",
-          "pdf": "harry_potter.pdf",
+          "pdf": "documents/book1.pdf",
           "publisher": {
             "id": 7,
             "name": "Salamandra",
@@ -116,7 +146,7 @@
             {"id": 5, "name": "Fantasía"},
             {"id": 12, "name": "Aventura"}
           ],
-          "reviews": {"average": 4.9}
+          "reviews": {"average": 2.9}
         },
         {
           "id": 5,
@@ -127,7 +157,7 @@
           "edition_year": 2020,
           "synopsis": "Novela que narra la saga de la familia Trueba a lo largo de cuatro generaciones.",
           "cover_image": "images/book5.png",
-          "pdf": "casa_espiritus.pdf",
+          "pdf": "documents/book1.pdf",
           "publisher": {
             "id": 4,
             "name": "Editorial Planeta",
@@ -145,7 +175,7 @@
             {"id": 1, "name": "Realismo Mágico"},
             {"id": 10, "name": "Histórica"}
           ],
-          "reviews": {"average": 4.5}
+          "reviews": {"average": 1.5}
         },
         {
           "id": 6,
@@ -156,7 +186,7 @@
           "edition_year": 2019,
           "synopsis": "Thriller que mezcla misterio, conspiración y arte en una trepidante búsqueda del Santo Grial.",
           "cover_image": "images/book6.png",
-          "pdf": "codigo_davinci.pdf",
+          "pdf": "documents/book1.pdf",
           "publisher": {
             "id": 8,
             "name": "Umbriel",
@@ -174,7 +204,7 @@
             {"id": 6, "name": "Misterio"},
             {"id": 8, "name": "Thriller"}
           ],
-          "reviews": {"average": 4.2}
+          "reviews": {"average": 0.2}
         },
         {
           "id": 7,
@@ -185,7 +215,7 @@
           "edition_year": 2017,
           "synopsis": "Novela innovadora que puede leerse de forma lineal o siguiendo un tablero de dirección.",
           "cover_image": "images/book7.png",
-          "pdf": "rayuela.pdf",
+          "pdf": "documents/book1.pdf",
           "publisher": {
             "id": 9,
             "name": "Alfaguara",
@@ -214,7 +244,7 @@
           "edition_year": 2020,
           "synopsis": "Epica novela histórica sobre la construcción de una catedral en la Inglaterra medieval.",
           "cover_image": "images/book8.png",
-          "pdf": "pilares_tierra.pdf",
+          "pdf": "documents/book1.pdf",
           "publisher": {
             "id": 10,
             "name": "DeBolsillo",
@@ -243,7 +273,7 @@
           "edition_year": 2018,
           "synopsis": "Historia de amor que se desarrolla a lo largo de más de cincuenta años.",
           "cover_image": "images/book9.png",
-          "pdf": "amor_colera.pdf",
+          "pdf": "documents/book1.pdf",
           "publisher": {
             "id": 3,
             "name": "Editorial Sudamericana",
@@ -272,7 +302,7 @@
           "edition_year": 2019,
           "synopsis": "Misterio literario ambientado en la Barcelona de posguerra.",
           "cover_image": "images/book10.png",
-          "pdf": "sombra_viento.pdf",
+          "pdf": "documents/book1.pdf",
           "publisher": {
             "id": 4,
             "name": "Editorial Planeta",
@@ -290,7 +320,7 @@
             {"id": 6, "name": "Misterio"},
             {"id": 10, "name": "Histórica"}
           ],
-          "reviews": {"average": 4.8}
+          "reviews": {"average": 3.8}
         }
       ],
     "error:": null

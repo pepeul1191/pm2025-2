@@ -1,0 +1,61 @@
+{
+    "success": true,
+    "message": "Vamos bien",
+    "data": {
+        "gerens": [
+            {
+                "id": 1, 
+                "name": "Realismo Mágico"
+            },
+            {
+                "id": 2, 
+                "name": "Ficción Literaria"
+            },
+            {
+                "id": 3, 
+                "name": "Novela"
+            },
+            {
+                "id": 4, 
+                "name": "Ciencia Ficción"
+            },
+            {
+                "id": 5, 
+                "name": "Fantasía"
+            },
+            {
+                "id": 6, 
+                "name": "Misterio"
+            },
+            {
+                "id": 7, 
+                "name": "Romance"
+            },
+            {
+                "id": 8, 
+                "name": "Thriller"
+            },
+            {
+                "id": 9, 
+                "name": "Religión"
+            },
+            {
+                "id": 10, 
+                "name": "Histórica"
+            },
+            {
+                "id": 11, 
+                "name": "Poesía"
+            },
+            {
+                "id": 12, 
+                "name": "Aventura"
+            },
+            {
+                "id": 13, 
+                "name": "Experimental"
+            }
+        ]
+    },
+    "error:": null
+}

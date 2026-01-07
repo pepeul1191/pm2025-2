@@ -1,0 +1,19 @@
+@startuml
+actor Usuario
+participant "Página de BookList" as BooksListPage
+participant "Controlador de Book List" as BooksListController
+participant "Servicio de Libros" as BooksService
+participant "Servicio de Géneros" as GerensService
+
+Usuario -> BooksListPage : Cargar vista
+BooksListPage -> BooksListController : listBooks()
+BooksListController -> BooksService : fetchAll()
+BooksListController <- BooksService : response Future<GenericResponse>
+BooksListController <- BooksListController : libros List<Book>
+
+BooksListPage -> BooksListController : listGenre()
+BooksListController -> GenreService : fetchAll()
+BooksListController <- GenreService : response Future<GenericResponse>
+BooksListController <- BooksListController : libros List<Genre>
+
+@enduml

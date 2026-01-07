@@ -6,41 +6,12 @@ class BookItemList extends StatelessWidget {
   final Book book;
   BookItemList({super.key, required this.book});
 
-  Widget _menu(BuildContext context) {
-    return PopupMenuButton<String>(
-      icon: Icon(
-        Icons.more_vert,
-        color: Theme.of(context).colorScheme.onSecondaryContainer,
-      ),
-      onSelected: (value) async {
-        if (value == 'view_detail') {
-          Navigator.pushNamed(context, '/book', arguments: book);
-        } else if (value == 'read') {
-          print('read');
-        } else if (value == 'comentaries') {
-          print('comentaries');
-        } else if (value == 'rate') {
-          print('rate');
-        }
-      },
-      itemBuilder: (BuildContext context) {
-        return [
-          PopupMenuItem(
-            value: 'view_detail',
-            child: Text('Ver Detalle'),
-          ),
-          PopupMenuItem(
-            value: 'read', 
-            child: Text('Leer')),
-          PopupMenuItem(
-            value: 'comentaries', 
-            child: Text('Comentarios')),
-          PopupMenuItem(
-            value: 'rate', 
-            child: Text('Calificar')),
-        ];
-      },
-    );
+  String _authors(Book book) {
+    String rpta = '';
+    book.authors.forEach((author) {
+      rpta = rpta + author.fullName + ', ';
+    });
+    return rpta.substring(0, rpta.length - 2);
   }
 
   Widget _buildBody(BuildContext context) {
@@ -48,8 +19,11 @@ class BookItemList extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: Theme.of(context).colorScheme.outlineVariant,
-            width: 1.0,
+            color:
+                Theme.of(
+                  context,
+                ).colorScheme.outlineVariant, // Color de la línea superior
+            width: 1.0, // Grosor de la línea
           ),
         ),
       ),
@@ -67,6 +41,7 @@ class BookItemList extends StatelessWidget {
                 Object exception,
                 StackTrace? stackTrace,
               ) {
+                // Este widget se muestra cuando ocurre un error al cargar la imagen de red.
                 return Image.asset(
                   'assets/images/libro.png',
                   width: 120,
@@ -76,76 +51,96 @@ class BookItemList extends StatelessWidget {
               },
             ),
             SizedBox(width: 20),
-            Expanded( // ← CRITICAL FIX: Add Expanded here
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    book.title,
+                    book.title, // titulo
                     style: TextStyle(fontWeight: FontWeight.bold),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2, // Allow title to wrap to 2 lines
                   ),
-                  SizedBox(height: 4),
-                  Text(
-                    "Autores FALTA!!!!!!!!!",
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
-                  SizedBox(height: 2),
+                  book.authors.length == 1
+                      ? Text("Autor ${book.authors[0].fullName}")
+                      : Text("Autores ${_authors(book)}"),
                   Text("Paginas ${book.pages}"),
-                  SizedBox(height: 2),
                   Text("ISBN: ${book.isbn}"),
-                  SizedBox(height: 2),
-                  Text(
-                    "Editorial: ${book.publisher.name}",
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
-                  SizedBox(height: 2),
+                  Text("Editorial: ${book.publisher.name}"),
                   Text("Año de Publicación: ${book.publicationYear}"),
                   SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.star,
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        size: 18, // Slightly smaller icons
+                  book.averageRating != null
+                      ? Row(
+                        children: [
+                          // Estrellas llenas
+                          ...List.generate(book.averageRating!.round(), (
+                            index,
+                          ) {
+                            return Icon(
+                              Icons.star,
+                              color:
+                                  Theme.of(
+                                    context,
+                                  ).colorScheme.onSurfaceVariant,
+                            );
+                          }),
+                          // Estrellas vacías
+                          ...List.generate(5 - book.averageRating!.round(), (
+                            index,
+                          ) {
+                            return Icon(
+                              Icons.star_border, // ← Cambiado a estrella vacía
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onSurfaceVariant.withOpacity(0.3),
+                            );
+                          }),
+                        ],
+                      )
+                      : Row(
+                        children: List.generate(5, (index) {
+                          return Icon(
+                            Icons.star_border_outlined,
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant,
+                          );
+                        }),
                       ),
-                      SizedBox(width: 2),
-                      Icon(
-                        Icons.star,
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        size: 18,
-                      ),
-                      SizedBox(width: 2),
-                      Icon(
-                        Icons.star,
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        size: 18,
-                      ),
-                      SizedBox(width: 2),
-                      Icon(
-                        Icons.star,
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        size: 18,
-                      ),
-                      SizedBox(width: 2),
-                      Icon(
-                        Icons.star,
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        size: 18,
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
-            SizedBox(width: 10), // Reduced spacing
+            SizedBox(width: 20),
             _menu(context),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _menu(BuildContext context) {
+    return PopupMenuButton<String>(
+      icon: Icon(
+        Icons.more_vert,
+        color: Theme.of(context).colorScheme.onSurfaceVariant,
+      ),
+      onSelected: (value) async {
+        //print(book);
+        if (value == 'detail') {
+          print('detail');
+        } else if (value == 'read') {
+          Navigator.pushNamed(context, '/book', arguments: book);
+        } else if (value == 'comment') {
+          print('comment');
+        } else if (value == 'rate') {
+          print('rate');
+        }
+      },
+      itemBuilder: (BuildContext context) {
+        return [
+          PopupMenuItem(value: 'detail', child: Text('Ver Detalle')),
+          PopupMenuItem(value: 'read', child: Text('Leer')),
+          PopupMenuItem(value: 'comment', child: Text('Comentarios')),
+          PopupMenuItem(value: 'rate', child: Text('Calificar')),
+        ];
+      },
     );
   }
 

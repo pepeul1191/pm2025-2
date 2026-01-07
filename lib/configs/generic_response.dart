@@ -1,3 +1,5 @@
+// configs/generic_response.dart
+
 class GenericResponse<T> {
   final bool success;
   final T? data;

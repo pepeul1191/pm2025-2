@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat con WebSockets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        #chat-container {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            height: 400px;
+            overflow-y: auto;
+        }
+        
+        #message-input {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        #send-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        #send-button:hover {
+            background-color: #0056b3;
+        }
+        
+        .message {
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 5px;
+        }
+        
+        .user-message {
+            background-color: #e3f2fd;
+            margin-left: 20px;
+        }
+        
+        .system-message {
+            background-color: #fff3cd;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .other-message {
+            background-color: #f8f9fa;
+        }
+        
+        .message-info {
+            font-size: 0.8em;
+            color: #666;
+        }
+        
+        #status {
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        
+        .connected {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .disconnected {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chat en Tiempo Real</h1>
+    
+    <div id="status" class="disconnected">
+        Desconectado
+    </div>
+    
+    <div id="user-count">
+        Usuarios conectados: <span id="count">0</span>
+    </div>
+    
+    <div id="chat-container"></div>
+    
+    <div>
+        <input type="text" id="message-input" placeholder="Escribe tu mensaje..." />
+        <button id="send-button">Enviar</button>
+    </div>
+
+    <script>
+        class ChatClient {
+            constructor() {
+                this.ws = null;
+                this.userId = null;
+                this.isConnected = false;
+                
+                this.initializeElements();
+                this.setupEventListeners();
+                this.connect();
+            }
+            
+            initializeElements() {
+                this.chatContainer = document.getElementById('chat-container');
+                this.messageInput = document.getElementById('message-input');
+                this.sendButton = document.getElementById('send-button');
+                this.statusElement = document.getElementById('status');
+                this.userCountElement = document.getElementById('count');
+            }
+            
+            setupEventListeners() {
+                this.sendButton.addEventListener('click', () => this.sendMessage());
+                this.messageInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.sendMessage();
+                    }
+                });
+            }
+            
+            connect() {
+                const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+                const wsUrl = `${protocol}//${window.location.host}`;
+                
+                this.ws = new WebSocket(wsUrl);
+                
+                this.ws.onopen = () => {
+                    this.isConnected = true;
+                    this.updateStatus('Conectado', 'connected');
+                    console.log('Conectado al servidor WebSocket');
+                };
+                
+                this.ws.onmessage = (event) => {
+                    const data = JSON.parse(event.data);
+                    this.handleMessage(data);
+                };
+                
+                this.ws.onclose = () => {
+                    this.isConnected = false;
+                    this.updateStatus('Desconectado', 'disconnected');
+                    console.log('Conexión WebSocket cerrada');
+                    
+                    // Intentar reconectar después de 3 segundos
+                    setTimeout(() => this.connect(), 3000);
+                };
+                
+                this.ws.onerror = (error) => {
+                    console.error('Error de WebSocket:', error);
+                    this.updateStatus('Error de conexión', 'disconnected');
+                };
+            }
+            
+            handleMessage(data) {
+                switch (data.type) {
+                    case 'system':
+                        this.addSystemMessage(data.message);
+                        this.userId = data.userId;
+                        break;
+                    
+                    case 'message':
+                        this.addChatMessage(data);
+                        break;
+                    
+                    case 'user-joined':
+                        this.addSystemMessage(`Usuario ${data.userId} se ha unido al chat`);
+                        this.updateUserCount(data.userCount);
+                        break;
+                    
+                    case 'user-left':
+                        this.addSystemMessage(`Usuario ${data.userId} ha abandonado el chat`);
+                        this.updateUserCount(data.userCount);
+                        break;
+                }
+            }
+            
+            sendMessage() {
+                if (!this.isConnected) {
+                    alert('No estás conectado al servidor');
+                    return;
+                }
+                
+                const message = this.messageInput.value.trim();
+                if (message) {
+                    this.ws.send(JSON.stringify({
+                        message: message
+                    }));
+                    this.messageInput.value = '';
+                }
+            }
+            
+            addChatMessage(data) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = data.userId === this.userId ? 
+                    'message user-message' : 'message other-message';
+                
+                messageDiv.innerHTML = `
+                    <div class="message-info">
+                        ${data.userName} - ${data.timestamp}
+                    </div>
+                    <div>${this.escapeHtml(data.message)}</div>
+                `;
+                
+                this.chatContainer.appendChild(messageDiv);
+                this.scrollToBottom();
+            }
+            
+            addSystemMessage(message) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message system-message';
+                messageDiv.textContent = message;
+                
+                this.chatContainer.appendChild(messageDiv);
+                this.scrollToBottom();
+            }
+            
+            updateStatus(status, className) {
+                this.statusElement.textContent = status;
+                this.statusElement.className = className;
+            }
+            
+            updateUserCount(count) {
+                this.userCountElement.textContent = count;
+            }
+            
+            scrollToBottom() {
+                this.chatContainer.scrollTop = this.chatContainer.scrollHeight;
+            }
+            
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        }
+        
+        // Inicializar la aplicación cuando se carga la página
+        document.addEventListener('DOMContentLoaded', () => {
+            new ChatClient();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+INSERT INTO countries (id, name, male_demonym, female_demonym, flag_image) VALUES
+(1, 'México', 'mexicano', 'mexicana', 'mexico.png'),
+(2, 'España', 'español', 'española', 'espana.png'),
+(3, 'Francia', 'francés', 'francesa', 'francia.png'),
+(4, 'Alemania', 'alemán', 'alemana', 'alemania.png'),
+(5, 'Italia', 'italiano', 'italiana', 'italia.png'),
+(6, 'Brasil', 'brasileño', 'brasileña', 'brasil.png'),
+(7, 'Argentina', 'argentino', 'argentina', 'argentina.png'),
+(8, 'Japón', 'japonés', 'japonesa', 'japon.png'),
+(9, 'Canadá', 'canadiense', 'canadiense', 'canada.png'),
+(10, 'Estados Unidos', 'estadounidense', 'estadounidense', 'usa.png'),
+(11, 'China', 'chino', 'china', 'china.png'),
+(12, 'Rusia', 'ruso', 'rusa', 'rusia.png'),
+(13, 'India', 'indio', 'india', 'india.png'),
+(14, 'Reino Unido', 'británico', 'británica', 'reino_unido.png'),
+(15, 'Australia', 'australiano', 'australiana', 'australia.png');

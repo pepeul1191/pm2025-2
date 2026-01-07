@@ -1,0 +1,12 @@
+-- INSERT para la tabla books
+INSERT INTO books (id, title, isbn, pages, publication_year, edition_year, synopsis, cover_image, pdf, publisher_id) VALUES
+(1, 'Cien años de soledad', '978-84-376-0494-7', 471, 1967, 2020, 'La novela narra la historia de la familia Buendía a lo largo de siete generaciones en el pueblo ficticio de Macondo.', 'images/book1.png', 'documents/book1.pdf', 3),
+(2, '1984', '978-84-9759-327-5', 326, 1949, 2019, 'Una distopía que presenta un estado totalitario que controla cada aspecto de la vida de los ciudadanos.', 'images/book2.png', 'documents/book2.pdf', 5),
+(3, 'Cien sonetos de amor', '978-84-8365-383-7', 128, 1959, 2018, 'Colección de sonetos que expresan el amor más profundo y apasionado del poeta chileno.', 'images/book3.png', 'documents/book3.pdf', 6),
+(4, 'Harry Potter y la piedra filosofal', '978-84-9838-465-7', 320, 1997, 2021, 'El primer libro de la saga del joven mago Harry Potter y sus aventuras en Hogwarts.', 'images/book4.png', 'documents/book1.pdf', 7),
+(5, 'La casa de los espíritus', '978-84-204-8301-3', 432, 1982, 2020, 'Novela que narra la saga de la familia Trueba a lo largo de cuatro generaciones.', 'images/book5.png', 'documents/book1.pdf', 4),
+(6, 'El código Da Vinci', '978-84-9759-748-8', 656, 2003, 2019, 'Thriller que mezcla misterio, conspiración y arte en una trepidante búsqueda del Santo Grial.', 'images/book6.png', 'documents/book1.pdf', 8),
+(7, 'Rayuela', '978-84-339-0092-6', 736, 1963, 2017, 'Novela innovadora que puede leerse de forma lineal o siguiendo un tablero de dirección.', 'images/book7.png', 'images/book7.png', 9),
+(8, 'Los pilares de la Tierra', '978-84-9759-882-9', 1056, 1989, 2020, 'Epica novela histórica sobre la construcción de una catedral en la Inglaterra medieval.', 'images/book8.png', 'documents/book1.pdf', 10),
+(9, 'El amor en los tiempos del cólera', '978-84-397-2071-5', 464, 1985, 2018, 'Historia de amor que se desarrolla a lo largo de más de cincuenta años.', 'images/book9.png', 'documents/book1.pdf', 3),
+(10, 'La sombra del viento', '978-84-204-8302-0', 576, 2001, 2019, 'Misterio literario ambientado en la Barcelona de posguerra.', 'images/book10.png', 'documents/book1.pdf', 4);
